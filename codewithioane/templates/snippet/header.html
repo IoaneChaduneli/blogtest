@@ -27,12 +27,20 @@
           <img class="bi me-2" width="40" height="32" src="{% static '1200px-Io-logo.svg.png' %}">
           <span class="fs-4">CodeWithIoane</span>
         </a>
-  
+        
         <ul class="nav nav-pills">
-          <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Registered Users</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Create Post</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+            {% if user.is_authenticated %}
+                <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+                <li class="nav-item"><a href="{% url 'account:logout' %}" class="nav-link">Logout</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Create Post</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+          {% else %}
+                <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="{% url 'account:register' %}" class="nav-link">Register</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Create Post</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">About</a></li> 
+          {% endif %} 
         </ul>
       </header>
     </div>

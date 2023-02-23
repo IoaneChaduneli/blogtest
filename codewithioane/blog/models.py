@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db.models.signals import pre_save, post_delete
 from django.utils.text import slugify
 from django.dispatch import receiver
@@ -14,7 +14,7 @@ def upload_location(instance, filename, **kwarfs):
 class BlogPost(models.Model):
     title = models.CharField(max_length=60)
     text = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = models.FileField(blank=False)
     date_create = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(blank=True, unique=True)
